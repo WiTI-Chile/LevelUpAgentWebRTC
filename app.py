@@ -1,13 +1,21 @@
 import socketio
 from aiohttp import web
+from audio_processing.Speech_recognition import speech_recognition
 import os
-import speech_recognition as sr
-import tempfile
-from pydub import AudioSegment
+from openAiFunctions.estructura import json_to_dataframe
+from dotenv import load_dotenv
+load_dotenv()
+# Crear variables globales
+
+texts_by_room = {}
+questions = ""
+with open("questions.json", "r",encoding="UTF-8") as f:
+    questions = str(f.read())
+questions = json_to_dataframe(questions,os.getenv("OPENAI_API_KEY"))
 
 # Crear un servidor Socket.IO con política CORS
 sio = socketio.AsyncServer(cors_allowed_origins='*')
-r = sr.Recognizer()
+
 
 
 # Crear una aplicación web para el servidor
@@ -29,46 +37,19 @@ async def room_join(sid, data):
     email = data.get('email')
     room = data.get('room')
     nombre = data.get('nombre')
-    rol = data.get('rol')
+    typeOfUser = data.get('typeOfUser')
 
     await sio.enter_room(sid, room)
     await sio.emit('user_joined', {'email': email, 'id': sid}, room=room)
     await sio.emit('room_join', data, room=sid)
     print(f'{nombre} se ha unido a la sala {room}')
 
-texts_by_room = {}
-
 @sio.event
-async def data(sid, audio_stream):
-    # Crear un archivo temporal para guardar el stream de audio
-    temp_audio_fd, temp_audio_path = tempfile.mkstemp()
-    with os.fdopen(temp_audio_fd, 'wb') as temp_audio_file:
-        temp_audio_file.write(audio_stream)
-
-    # Convertir el audio a formato WAV
-    audio = AudioSegment.from_file(temp_audio_path)
-    audio.export(temp_audio_path, format="wav")
-
-    # Procesar el audio con speech_recognition
-    with sr.AudioFile(temp_audio_path) as source:
-        audio_data = r.record(source)
-        text = r.recognize_google(audio_data, language='es-ES')
-
-    # Borrar el archivo temporal
-    #os.remove(temp_audio_path)
-
-    # Obtener la sala a la que pertenece el usuario
-    rooms = sio.rooms(sid)
-    room = rooms[0] if rooms else None
-
-    if room:
-        # Si la sala no está en el diccionario, agregarla
-        if room not in texts_by_room:
-            texts_by_room[room] = []
-
-        # Almacenar el texto con el identificador del socket en el array de la sala
-        texts_by_room[room].append({sid: text})
-        print(f'[{room}] {sid}: {text}')
+async def data(sid, data):
+    try:
+        await speech_recognition(sio,sid,data,questions)
+    except Exception as e:
+        return
 
 @sio.event
 async def user_call(sid, data):

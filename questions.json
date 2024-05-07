@@ -1,0 +1,332 @@
+{
+  "skills": [
+    {
+      "nombre": "Lógica de Negocio",
+      "nota": 0,
+      "order": 0,
+      "dimensiones": [
+        {
+          "nombre": "Dominio de la Logica de Negocio",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "Cómo te sintes con  la logica de negocio?",
+          "tipo": "radio",
+          "respuestas": [
+            {
+              "nombre": "Habilidad Insuficiente",
+              "descripcion": "Habilidad Insuficiente",
+              "valor": false,
+              "puntaje": 2
+            },
+            {
+              "nombre": "Habilidad Suficiente",
+              "descripcion": "Habilidad Suficiente",
+              "valor": false,
+              "puntaje": 4
+            },
+            {
+              "nombre": "Habilidad Lograda",
+              "descripcion": "Habilidad Lograda",
+              "valor": false,
+              "puntaje": 6
+            },
+            {
+              "nombre": "Habilidad Buena",
+              "descripcion": "Habilidad Buena",
+              "valor": false,
+              "puntaje": 8
+            },
+            {
+              "nombre": "Habilidad Excelente",
+              "descripcion": "Habilidad Excelente",
+              "valor": false,
+              "puntaje": 10
+            }
+          ]
+        },
+        {
+          "nombre": "Descripción logica de Negocio",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "¿Cuál es la lógica de negocio? ¿Qué hacen ahí?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Reflexión Personal sobre la Lógica de Negocio",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "En relación a tu experiencia trabajando con lógicas de negocio, ¿qué aspectos encuentras más desafiantes y cómo has superado estos retos?",
+          "tipo": "textArea",
+          "valor":"TEXTO DE LA RESPUESTA"
+        },
+        {
+          "nombre": "Enfoque en la Resolución de Problemas",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "Cuando te enfrentas a un problema de negocio que requiere una solución de software, ¿cuál es tu enfoque prioritario?",
+          "tipo": "radio",
+          "respuestas": [
+            {
+              "nombre": "Identificar y aplicar la tecnología más avanzada disponible",
+              "descripcion": "Identificar y aplicar la tecnología más avanzada disponible",
+              "valor": false,
+              "puntaje": 2
+            },
+            {
+              "nombre": "Entender profundamente la necesidad del negocio y luego diseñar una solución adecuada, independientemente de la tecnología.",
+              "descripcion": "Entender profundamente la necesidad del negocio y luego diseñar una solución adecuada, independientemente de la tecnología.",
+              "valor": false,
+              "puntaje": 10
+            },
+            {
+              "nombre": "Consultar con el equipo de TI y seguir sus recomendaciones.",
+              "descripcion": "Consultar con el equipo de TI y seguir sus recomendaciones.",
+              "valor": false,
+              "puntaje": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Trabajo en Equipo",
+      "nota": 0,
+      "order": 0,
+      "dimensiones": [
+        {
+          "nombre": "Valoración de Opiniones",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": " Reflexiona sobre una situación reciente donde tus opiniones fueron consideradas (o no) en la toma de decisiones del equipo. ¿Cómo crees que esto impactó en el proyecto y en tu sentido de pertenencia al equipo?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Comodidad al Compartir Ideas",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "¿Te sientes cómodo exponiendo tus ideas en un ambiente de trabajo colaborativo? Describe una ocasión en la que hayas presentado una idea a tu equipo y cómo fue recibida.",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Percepción y Confianza en el Equipo",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "¿Cómo describirías tu nivel de confianza en tu equipo y por qué? Proporciona ejemplos específicos que justifiquen tus sentimientos.",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Sentimiento de Pertenencia al Equipo",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "¿Cómo te sientes en tu equipo actual? ¿Hay aspectos del ambiente de equipo que contribuyan positiva o negativamente a tu experiencia laboral?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Recepción de Opiniones",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "¿Cómo sientes que el equipo recibe tus opiniones?",
+          "tipo": "radio",
+          "respuestas": [
+            {
+              "nombre": "Mis opiniones son siempre valoradas y consideradas.",
+              "descripcion": "Mis opiniones son siempre valoradas y consideradas.",
+              "valor": false,
+              "puntaje": 2
+            },
+            {
+              "nombre": "A veces siento que mis opiniones no son tomadas en cuenta.",
+              "descripcion": "A veces siento que mis opiniones no son tomadas en cuenta.",
+              "valor": false,
+              "puntaje": 4
+            },
+            {
+              "nombre": "Rara vez se consideran mis puntos de vista.",
+              "descripcion": "Rara vez se consideran mis puntos de vista.",
+              "valor": false,
+              "puntaje": 6
+            }
+          ]
+        },
+        {
+          "nombre": "Confianza en el Equipo",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "¿Cómo describirías tu nivel de confianza en tu equipo?",
+          "tipo": "radio",
+          "respuestas": [
+            {
+              "nombre": " Tengo plena confianza en mi equipo y en nuestra capacidad de trabajar juntos.",
+              "descripcion": " Tengo plena confianza en mi equipo y en nuestra capacidad de trabajar juntos.",
+              "valor": false,
+              "puntaje": 2
+            },
+            {
+              "nombre": "Mi confianza varía según la situación o el proyecto.",
+              "descripcion": "Mi confianza varía según la situación o el proyecto.",
+              "valor": false,
+              "puntaje": 4
+            },
+            {
+              "nombre": "Tengo dudas sobre la efectividad de nuestro trabajo en equipo.",
+              "descripcion": "Tengo dudas sobre la efectividad de nuestro trabajo en equipo.",
+              "valor": false,
+              "puntaje": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Habilidades Técnicas",
+      "nota": 0,
+      "order": 0,
+      "dimensiones": [
+        {
+          "nombre": "Enfoque en la Resolución de Problemas Técnicos",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "Cuando enfrentas un problema técnico, ¿cuál es tu enfoque típico?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Actualización y Mantenimiento de Habilidades Técnicas:",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Cómo te mantienes actualizado con las nuevas tendencias y tecnologías en tu campo? ¿Puedes mencionar alguna habilidad técnica reciente que hayas aprendido y cómo la has aplicado?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Solución de Problemas Técnicos",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "Describe un desafío técnico complejo que hayas enfrentado en tu trabajo. ¿Cómo lo identificaste, qué enfoque utilizaste para resolverlo y qué aprendiste de esta experiencia?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Entiende la Propuesta de Valor del Producto-Servicio o Propósito",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "Evalúa la comprensión de lo que hace valioso al producto o servicio para el cliente.",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Autopercepción del Nivel Técnico",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Cómo crees que tus colegas, supervisores o miembros de tu equipo perciben tu nivel técnico? ¿Puedes proporcionar ejemplos o situaciones específicas que crees que han influido en esta percepción?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Interés en Aprender Nuevas Tecnologías",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Qué tecnologías o habilidades nuevas te interesan aprender y cómo planeas incorporarlas en tu desarrollo profesional? ¿Cómo crees que estas tecnologías podrían impactar tu carrera a futuro?",
+          "tipo": "textArea"
+        }
+      ]
+    },
+    {
+      "nombre": "Puntualidad y Calidad",
+      "nota": 0,
+      "order": 0,
+      "dimensiones": [
+        {
+          "nombre": "Plazos de Entrega",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Cómo aseguras cumplir con los plazos de entregas?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Precisión en Estimaciones",
+          "puntajeMaximo": 10,
+          "nota": 0,
+          "description": "¿Cómo calificarías la precisión de tus estimaciones?",
+          "tipo": "radio",
+          "respuestas": [
+            {
+              "nombre": "Muy Precisas",
+              "descripcion": "A menudo entrega trabajos que requieren correcciones y raramente cumple con los plazos establecidos.",
+              "valor": false,
+              "puntaje": 1
+            },
+            {
+              "nombre": "Generalmente Precisas",
+              "descripcion": "Entrega trabajos de calidad aceptable, pero puede mejorar. Ocasionalmente tiene dificultades con los plazos.",
+              "valor": false,
+              "puntaje": 2
+            },
+            {
+              "nombre": "Moderadamente Precisas",
+              "descripcion": "Suele entregar trabajos de buena calidad y cumple con los plazos en la mayoría de las ocasiones.",
+              "valor": false,
+              "puntaje": 3
+            },
+            {
+              "nombre": "Variablemente Precisas",
+              "descripcion": "Casi siempre entrega trabajos de alta calidad y es confiable en cuanto al cumplimiento de plazos.",
+              "valor": false,
+              "puntaje": 4
+            },
+            {
+              "nombre": "Poco Precisas",
+              "descripcion": "Poco Precisas",
+              "valor": false,
+              "puntaje": 5
+            }
+          ]
+        },
+        {
+          "nombre": "Compromiso con Reuniones y Rituales de Equipo",
+          "puntajeMaximo": 0,
+          "nota": 0,
+          "description": "¿Cómo describirías tu nivel de puntualidad al conectarte a reuniones y rituales de equipo y qué factores crees que influyen en tu puntualidad?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Calidad en los Desarrollos",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Cuáles son tus estrategias para asegurar la calidad en los desarrollos que entregas? ¿Cómo manejas el equilibrio entre la calidad, los plazos de entrega y las expectativas del cliente o del equipo?",
+          "tipo": "textArea"
+        }
+      ]
+    },
+    {
+      "nombre": "Proyección",
+      "nota": 0,
+      "order": 0,
+      "dimensiones": [
+        {
+          "nombre": "Metas y Desafíos Personales",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Cuáles son tus principales metas o desafíos profesionales en el corto y mediano plazo? ¿Cómo planeas alcanzar estos objetivos?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Apoyo para Lograr Objetivos",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Qué crees que podría hacer tu equipo, líderes o la organización para apoyarte en alcanzar tus metas profesionales? ¿Hay recursos específicos, oportunidades de formación o cambios en el entorno de trabajo que te serían particularmente útiles?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Evaluación de Oportunidades de Crecimiento",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "En tu rol actual, ¿cómo evalúas las oportunidades de crecimiento profesional que se te ofrecen? ¿Hay áreas específicas en las que sientes que necesitas más apoyo o recursos?",
+          "tipo": "textArea"
+        },
+        {
+          "nombre": "Tendencias Futuras",
+          "puntajeMaximo": 5,
+          "nota": 0,
+          "description": "¿Hay alguna área específica de tecnología o habilidad que consideres crucial para tu desarrollo futuro?",
+          "tipo": "textArea"
+        }
+      ]
+    }
+  ]
+}
