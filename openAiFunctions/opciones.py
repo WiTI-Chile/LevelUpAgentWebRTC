@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-def get_opcion(pregunta, respuesta, opciones, api_key, lista_de_puntajes):
+def get_opcion(pregunta, respuesta, opciones, api_key):
     """
     Utiliza la API de OpenAI para determinar cuál de las opciones proporcionadas
     corresponde mejor a una respuesta dada para una pregunta específica.
@@ -72,8 +72,6 @@ Debes responder exclusivamente con el número de la opción que mejor correspond
 
     try:
         resp = int(resp)
-        if resp >= 0:
-            resp = lista_de_puntajes[resp]
     except:
         print('ValueError')
         resp = -1
