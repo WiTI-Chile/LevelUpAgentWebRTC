@@ -65,6 +65,7 @@
           "nota": 0,
           "description": "Cuando te enfrentas a un problema de negocio que requiere una solución de software, ¿cuál es tu enfoque prioritario?",
           "tipo": "radio",
+          "valor": 2,
           "respuestas": [
             {
               "nombre": "Identificar y aplicar la tecnología más avanzada disponible",

@@ -1,16 +1,19 @@
 import socketio
 from aiohttp import web
-from audio_processing.Speech_recognition import speech_recognition
+from audio_processing.Index import process_audio
 import os
 from openAiFunctions.estructura import json_to_dataframe
 from dotenv import load_dotenv
+import json
 load_dotenv()
 # Crear variables globales
 
 texts_by_room = {}
 questions = ""
+json_questions = {}
 with open("questions.json", "r",encoding="UTF-8") as f:
     questions = str(f.read())
+    json_questions = json.loads(questions)
 questions = json_to_dataframe(questions,os.getenv("OPENAI_API_KEY"))
 
 # Crear un servidor Socket.IO con política CORS
@@ -47,7 +50,7 @@ async def room_join(sid, data):
 @sio.event
 async def data(sid, data):
     try:
-        await speech_recognition(sio,sid,data,questions)
+        await process_audio(sio,sid,data,questions,json_questions)
     except Exception as e:
         return
 
