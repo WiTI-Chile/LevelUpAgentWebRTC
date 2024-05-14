@@ -6,7 +6,6 @@ from openAiFunctions.estructura import json_to_dataframe
 from dotenv import load_dotenv
 import json
 load_dotenv()
-# Crear variables globales
 
 texts_by_room = {}
 questions = ""
@@ -16,21 +15,17 @@ with open("questions.json", "r",encoding="UTF-8") as f:
     json_questions = json.loads(questions)
 questions = json_to_dataframe(questions,os.getenv("OPENAI_API_KEY"))
 
-# Crear un servidor Socket.IO con política CORS
 sio = socketio.AsyncServer(cors_allowed_origins='*')
 
 
 
-# Crear una aplicación web para el servidor
 app = web.Application()
 sio.attach(app)
 
-# Definir el evento de conexión
 @sio.event
 def connect(sid, environ):
     print('connect ', sid)
 
-# Definir el evento de desconexión
 @sio.event
 def disconnect(sid):
     print('disconnect ', sid)
@@ -87,6 +82,5 @@ async def end_call(sid, data):
 async def user_toggleCamera(sid, data):
     to = data.get('to')
     await sio.emit('user_toggleCamera', {'from': sid}, room=to)
-# Si este archivo se ejecuta directamente, iniciar el servidor
 if __name__ == '__main__':
     web.run_app(app, host='0.0.0.0', port=8000)

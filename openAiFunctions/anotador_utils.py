@@ -72,27 +72,21 @@ def get_embedding(text, api_key, model="text-embedding-3-large"):
 def buscar_preguntas_similares(pregunta, df_preguntas, api_key, n_resultados=2):
     df = df_preguntas.copy()
 
-    # Obtener el embedding para la pregunta dada
     busqueda_embed = get_embedding(pregunta, api_key, model='text-embedding-3-large')
     if busqueda_embed is None:
-        #print("No se pudo obtener el embedding para la pregunta.")
         return None
     try:
-      # Asegurarse de que el embedding de búsqueda esté en el formato correcto (2D)
       busqueda_embed_2d = np.array(busqueda_embed).reshape(1, -1)
 
       def calculate_similarity(embedding):
           if embedding is not None and not np.isnan(embedding).any():
-              # Asegurarse que el embedding esté en formato 2D
               embedding_2d = np.array(embedding).reshape(1, -1)
               return cosine_similarity(embedding_2d, busqueda_embed_2d)[0][0]
           else:
               return -1
 
-      # Calcular la similitud
       df["Similitud"] = df['Embedding_Pregunta'].map(calculate_similarity)
 
-      # Ordenar los resultados por similitud
       df = df.sort_values("Similitud", ascending=False)
     except:
       return None

@@ -30,7 +30,6 @@ async def process_audio(sio,sid, data, questions,json_questions):
                 if index_answer >= 0:
                     puntaje = question["respuestas"][index_answer]["puntaje"]
                 result = createSkill(json_questions,interviewer_question,puntaje)
-                # Connect to the socket of the interview
             sio.emit(os.getenv("LEVELUP_SOCKETIO_EVENT"), { "interview": result, "type": "meetingType" })
 
 def createSkill(json_questions,interviewer_question,valor):

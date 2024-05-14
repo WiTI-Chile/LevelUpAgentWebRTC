@@ -34,16 +34,12 @@ async def speech_recognition_interviewed(room,questions,texts_by_room,audio_data
         return
 def speech_recognition(audio_data):
     try:
-        # Crear un archivo temporal para guardar el stream de audio
         temp_audio_fd, temp_audio_path = tempfile.mkstemp()
         with os.fdopen(temp_audio_fd, 'wb') as temp_audio_file:
             temp_audio_file.write(audio_data)
-
-        # Convertir el audio a formato WAV
         audio = AudioSegment.from_file(temp_audio_path)
         audio.export(temp_audio_path, format="wav")
 
-        # Procesar el audio con speech_recognition
         with sr.AudioFile(temp_audio_path) as source:
             audio_data = r.record(source)
             text = r.recognize_google(audio_data, language='es-ES')
