@@ -32,20 +32,16 @@ def disconnect(sid):
 
 @sio.event
 async def room_join(sid, data):
-    email = data.get('email')
+    userActive = data.get('userActive')
     room = data.get('room')
-    nombre = data.get('nombre')
-    typeOfUser = data.get('typeOfUser')
-
+    await sio.emit('user_joined', {'userActive': userActive, 'id': sid}, room=room)
     await sio.enter_room(sid, room)
-    await sio.emit('user_joined', {'email': email, 'id': sid}, room=room)
-    await sio.emit('room_join', data, room=sid)
-    print(f'{nombre} se ha unido a la sala {room}')
+    await sio.emit('room_join', {'userActive': userActive, 'room': room, 'socketId': sid}, room=sid)
 
 @sio.event
 async def data(sid, data):
     try:
-        await process_audio(sio,sid,data,questions,json_questions)
+        process_audio(sio,sid,data,questions,json_questions)
     except Exception as e:
         return
 
@@ -79,8 +75,33 @@ async def end_call(sid, data):
     await sio.emit('end_call', {'from': sid}, room=to)
 
 @sio.event
-async def user_toggleCamera(sid, data):
+async def user_toggle_camera(sid, data):
     to = data.get('to')
-    await sio.emit('user_toggleCamera', {'from': sid}, room=to)
+    cameraState = data.get('cameraState')
+    await sio.emit('user_toggle_camera', {'from': sid, 'cameraState': cameraState}, room=to)
+
+@sio.event
+async def user_toggle_mic(sid, data):
+    to = data.get('to')
+    micState = data.get('micState')
+    await sio.emit('user_toggle_mic', {'from': sid, 'micState': micState}, room=to)
+
+@sio.event
+async def reconnect_stream(sid, data):
+    to = data.get('to')
+    await sio.emit('reconnect_stream', {'from': sid}, room=to)
+    print("Reconnecting...")
+
+@sio.event
+async def set_host(sid, data):
+    from_user = data.get('from')
+    userActive = data.get('userActive')
+    await sio.emit('set_host', {'from': from_user, 'userActive': userActive}, room=sid)
+
+@sio.event
+async def set_participant1(sid, data):
+    userActive = data.get('userActive')
+    await sio.emit('set_participant1', {'userActive': userActive}, room=sid)
+
 if __name__ == '__main__':
     web.run_app(app, host='0.0.0.0', port=8000)

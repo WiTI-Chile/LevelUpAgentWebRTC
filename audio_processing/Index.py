@@ -2,20 +2,27 @@ from audio_processing.Speech_recognition import speech_recognition_interviewer,s
 import copy
 from openAiFunctions.opciones import get_opcion
 import os
+import socketio
 
-texts_by_room = {}
-async def process_audio(sio,sid, data, questions,json_questions):
-    typeOfUser = data.get('typeOfUser')
+interviewers_texts_by_room = {}
+interviewed_text_by_room = {}
+def process_audio(sio,sid, data, questions,json_questions):
+    userName = data.get('name')
+    typeOfUser = data.get("typeOfUser")
     audio_data = data.get('audio')
     rooms = sio.rooms(sid)
-    room = rooms[0] if rooms else None
+    room = rooms[1] if rooms else None
     if typeOfUser == "Interviewer":
-        await speech_recognition_interviewer(room,questions,texts_by_room,audio_data)
+        speech_recognition_interviewer(room,questions,interviewers_texts_by_room,audio_data,userName)
     elif typeOfUser == "Interviewed":
-        await speech_recognition_interviewed(room,questions,texts_by_room,typeOfUser,audio_data)
-    if len(texts_by_room[room]["Interviewer"]) > 0 and texts_by_room[room]["Interviewer_accumulated_text"] == "":
-        interviewer_question = texts_by_room[room]["Interviewer"][len(texts_by_room[room]["Interviewer"]) - 1]
-        interviewed_answer = texts_by_room[room]["Interviewed_accumulated_text"]
+        speech_recognition_interviewed(room,interviewed_text_by_room,typeOfUser,audio_data)
+    if interviewers_texts_by_room.get(room) == None:
+        return
+    if interviewed_text_by_room.get(room) == None:
+        interviewed_text_by_room[room] = {"Interviewed": [],"Interviewed_accumulated_text":""}
+    if interviewers_texts_by_room[room]["currentQuestion"] != False:
+        interviewer_question = interviewers_texts_by_room[room]["currentQuestion"]
+        interviewed_answer = interviewed_text_by_room[room]["Interviewed_accumulated_text"]
         question = json_questions["skills"][interviewer_question[0]]["dimensiones"][interviewer_question[1]]
         result = {}
         if interviewed_answer != "":
@@ -30,7 +37,13 @@ async def process_audio(sio,sid, data, questions,json_questions):
                 if index_answer >= 0:
                     puntaje = question["respuestas"][index_answer]["puntaje"]
                 result = createSkill(json_questions,interviewer_question,puntaje)
-            sio.emit(os.getenv("LEVELUP_SOCKETIO_EVENT"), { "interview": result, "type": "meetingType" })
+            meetingType = str(room).split("_")[1]
+            interview = str(room).split("_")[0]
+            #GENERAR OTRA CONEXION SOCKET PARA ENVIAR LOS DATOS A LA API
+            sio_client = socketio.Client()
+            sio_client.connect(os.getenv("LEVELUP_SOCKETIO_URL"))
+            sio_client.emit(os.getenv("LEVELUP_SOCKETIO_EVENT"), { "interview": interview, "type": meetingType })
+            sio_client.disconnect()
 
 def createSkill(json_questions,interviewer_question,valor):
     result = {

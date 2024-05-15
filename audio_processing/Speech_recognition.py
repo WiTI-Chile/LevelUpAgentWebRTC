@@ -7,28 +7,29 @@ from openAiFunctions.anotador import anotador
 r = sr.Recognizer()
 
 
-async def speech_recognition_interviewer(room,questions,texts_by_room,audio_data):
+def speech_recognition_interviewer(room,questions,interviewers_texts_by_room,audio_data,userName):
     try:
         text = speech_recognition(audio_data)
         if room:
-            if room not in texts_by_room:
-                texts_by_room[room] = {"Interviewer": [],"Interviewer_accumulated_text":"", "Interviewed": [],"Interviewed_accumulated_text":""}
-            texts_by_room[room]["Interviewer_accumulated_text"] = texts_by_room[room]["Interviewer_accumulated_text"] + " " + text
-            question = anotador(texts_by_room[room]["Interviewer_accumulated_text"], questions, os.getenv("OPENAI_API_KEY"))
+            if room not in interviewers_texts_by_room:
+                interviewers_texts_by_room[room] = {f"{userName}":{"Interviewer": [],"Interviewer_accumulated_text":""},"currentQuestion":False}
+            interviewers_texts_by_room[room][userName]["Interviewer_accumulated_text"] = interviewers_texts_by_room[room][userName]["Interviewer_accumulated_text"] + " " + text
+            question = anotador(interviewers_texts_by_room[room][userName]["Interviewer_accumulated_text"], questions, os.getenv("OPENAI_API_KEY"))
             if question:
-                texts_by_room[room]["Interviewer"].append(question[1])
-                texts_by_room[room]["Interviewer_accumulated_text"] = ""
+                interviewers_texts_by_room[room][userName]["Interviewer"].append(question[1])
+                interviewers_texts_by_room[room]["currentQuestion"] = question[1]
+                interviewers_texts_by_room[room][userName]["Interviewer_accumulated_text"] = ""
             else:
                 return None
     except Exception as e:
         return
-async def speech_recognition_interviewed(room,questions,texts_by_room,audio_data):
+def speech_recognition_interviewed(room,interviewed_text_by_room,audio_data):
     try:
         text = speech_recognition(audio_data)
         if room:
-            if room not in texts_by_room:
-                texts_by_room[room] = {"Interviewer": [],"Interviewer_accumulated_text":"", "Interviewed": [],"Interviewed_accumulated_text":""}
-            texts_by_room[room]["Interviewed_accumulated_text"] = texts_by_room[room]["Interviewed_accumulated_text"] + " " + text
+            if room not in interviewed_text_by_room:
+                interviewed_text_by_room[room] = {"Interviewed": [],"Interviewed_accumulated_text":""}
+            interviewed_text_by_room[room]["Interviewed_accumulated_text"] = interviewed_text_by_room[room]["Interviewed_accumulated_text"] + " " + text
             
     except Exception as e:
         return
