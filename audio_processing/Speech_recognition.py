@@ -7,7 +7,7 @@ from openAiFunctions.anotador import anotador
 r = sr.Recognizer()
 
 
-def speech_recognition_interviewer(room,questions,interviewers_texts_by_room,audio_data,userName):
+def speech_recognition_interviewer(room,questions,interviewers_texts_by_room,audio_data,userName,interviewed_text_by_room):
     try:
         text = speech_recognition(audio_data)
         if room:
@@ -19,6 +19,9 @@ def speech_recognition_interviewer(room,questions,interviewers_texts_by_room,aud
                 interviewers_texts_by_room[room][userName]["Interviewer"].append(question[1])
                 interviewers_texts_by_room[room]["currentQuestion"] = question[1]
                 interviewers_texts_by_room[room][userName]["Interviewer_accumulated_text"] = ""
+                if interviewers_texts_by_room[room]["currentQuestion"] != False and question[1] != interviewers_texts_by_room[room]["currentQuestion"]:
+                    interviewed_text_by_room[room]["Interviewed"].append(interviewed_text_by_room[room]["Interviewed_accumulated_text"])
+                    interviewed_text_by_room[room]["Interviewed_accumulated_text"] = ""
             else:
                 return None
     except Exception as e:
