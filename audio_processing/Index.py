@@ -6,12 +6,11 @@ import socketio
 
 interviewers_texts_by_room = {}
 interviewed_text_by_room = {}
-def process_audio(sio,sid, data, questions,json_questions):
+def process_audio(data, questions,json_questions):
     userName = data.get('name')
     typeOfUser = data.get("typeOfUser")
     audio_data = data.get('audio')
-    rooms = sio.rooms(sid)
-    room = rooms[1] if rooms else None
+    room = data.get('room')
     if interviewed_text_by_room.get(room) == None:
         interviewed_text_by_room[room] = {"Interviewed": [],"Interviewed_accumulated_text":""}
     if typeOfUser == "Interviewer":
